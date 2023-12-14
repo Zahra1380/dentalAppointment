@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load handel_delay %}
+
+{% block title %}home{% endblock %}
+
+{% block content %}
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="{% static 'img/carousel-1.jpg' %}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental
+                                Treatment</h1>
+                            <a href="{% url 'appointment:make-appintment' %}"
+                               class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
+                            <a href="{% url 'contact:contact-us' %}"
+                               class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="{% static 'img/carousel-2.jpg' %}" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental
+                                Treatment</h1>
+                            <a href="{% url 'appointment:make-appintment' %}"
+                               class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
+                            <a href="{% url 'contact:contact-us' %}"
+                               class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+
+    <!-- Banner Start -->
+    <div class="container-fluid banner mb-5">
+        <div class="container">
+            <div class="row gx-0">
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
+                    <div class="bg-primary d-flex flex-column p-5" style="height: 300px;">
+                        <h3 class="text-white mb-3">Opening Hours</h3>
+                        <div class="d-flex justify-content-between text-white mb-3">
+                            <h6 class="text-white mb-0">{{ open.0.day }} - {{ open.4.day }}</h6>
+                            <p class="mb-0"> {{ open.0.open }} - {{ open.0.close }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between text-white mb-3">
+
+                            <h6 class="text-white mb-0">{{ open.5.day }}</h6>
+                            <p class="mb-0"> {{ open.5.open }} - {{ open.5.close }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between text-white mb-3">
+
+                            <h6 class="text-white mb-0">{{ open.6.day }}</h6>
+                            <p class="mb-0">close</p>
+                        </div>
+                        <a class="btn btn-light" href="{% url 'appointment:make-appintment' %}">Appointment</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
+                    <form action="{% url 'doctor:search-doctor' %}">
+                        <div class="bg-dark d-flex flex-column p-5" style="height: 300px;">
+                            <h3 class="text-white mb-3">Search A Doctor</h3>
+                            <div class="date mb-3" id="date" data-target-input="nearest">
+                                <input type="text" class="form-control bg-light border-0 datetimepicker-input"
+                                       placeholder="Appointment Date" data-target="#date" data-toggle="datetimepicker"
+                                       name="date"
+                                       style="height: 40px;">
+                            </div>
+                            <select class="form-select bg-light border-0 mb-3" style="height: 40px;" name="service">
+                                <option selected>Select A Service</option>
+                                {% for serv in service %}
+                                    <option value="{{ serv }}">{{ serv }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-light">Search Doctor</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 wow zoomIn bg-info" data-wow-delay="0.6s">
+                    <div class="bg-info">
+                        <div class=" d-flex flex-column p-5" style="height: 300px;">
+                            <h3 class="text-white mb-3 bg-info">Make Appointment</h3>
+                            <p class="text-white bg-info">Ipsum erat ipsum dolor clita rebum no rebum dolores labore,
+                                ipsum
+                                magna at
+                                eos et eos amet.
+
+                            </p>
+                            <strong>{{ address.phone }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Start -->
+
+
+    <!-- About Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="section-title mb-4">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">About Us</h5>
+                        <h1 class="display-5 mb-0">{{ about.title }}</h1>
+                    </div>
+                    <h4 class="text-body fst-italic mb-4">{{ about.subtitle }}</h4>
+                    <p class="mb-4">{{ about.explanation }}</p>
+                    <div class="row g-3">
+                        {% for item in about.items.all %}
+                            <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
+                                <h5 class="mb-3"><i
+                                        class="fa fa-check-circle text-primary me-3"></i>{{ item.item_title }}</h5>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'appointment:make-appintment' %}" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
+                       data-wow-delay="0.6s">Make
+                        Appointment</a>
+                </div>
+                <div class="col-lg-5" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
+                             src="{% static 'img/about.jpg' %}" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <!-- Appointment Start -->
+    <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-6 py-5">
+                    <div class="py-5">
+                        <h1 class="display-5 mb-4 text-white">We Are A Certified and Award Winning Dental Clinic You Can
+                            Trust</h1>
+                        <p class="mb-0 text-white">Eirmod sed tempor lorem ut dolores. Aliquyam sit sadipscing kasd
+                            ipsum.
+                            Dolor ea et dolore et at sea ea at dolor, justo ipsum duo rebum sea invidunt voluptua. Eos
+                            vero
+                            eos vero ea et dolore eirmod et. Dolores diam duo invidunt lorem. Elitr ut dolores magna
+                            sit.
+                            Sea dolore sanctus sed et. Takimata takimata sanctus sed.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="appointment-form bg-info h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
+                         data-wow-delay="0.6s">
+                        <h1 class="text-white mb-4">Make Appointment</h1>
+                        <form method="post" action="{% url 'appointment:make-appintment' %}">
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-12 col-sm-6">
+                                    <label>Service</label>
+                                    <select class="form-select bg-light border-0 mb-3" style="height: 55px;"
+                                            name="service">
+                                        {% for serv in service %}
+                                            <option value="{{ serv }}">{{ serv }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>Doctor</label>
+                                    <select class="form-select bg-light border-0" style="height: 55px;" name="doctor">
+                                        {% for doc in doctor %}
+                                            <option value="{{ doc }}" name="doctor">{{ doc }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <label>Your Name</label>
+                                    <input type="text" class="form-control bg-light border-0"
+                                           name="name" style="height: 55px;" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>Your Last Name</label>
+                                    <input type="text" class="form-control bg-light border-0"
+                                           name="lastname" style="height: 55px;" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>"Your Email"</label>
+                                    <input type="email" class="form-control bg-light border-0"
+                                           name="email" style="height: 55px;" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>"Your phone"</label>
+                                    <input type="phone" class="form-control bg-light border-0"
+                                           name="phone" style="height: 55px;" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>Appointment Date</label>
+
+                                    <div class="date" id="date1" data-target-input="nearest">
+                                        <input type="text"
+                                               class="form-control bg-light border-0 datetimepicker-input"
+                                               data-target="#date1"
+                                               data-toggle="datetimepicker" style="height: 55px;" name="date" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label>Time Schedule</label>
+                                    <select class="form-select bg-light border-0" style="height: 55px;" name="time"
+                                            required>
+                                        {% for time in times %}
+                                            <option value="{{ time }}" name="doctor">{{ time }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-dark w-100 py-3" type="submit">Make
+                                        Appointment
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    {% if success %}
+                                        <div class="border border-success text-success">{{ success }}</div>
+                                    {% endif %}
+                                    {% if error %}
+                                        <div class="border border-danger text-danger">{{ error }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Appointment End -->
+
+    <!-- Pricing Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5">
+                    <div class="section-title mb-4">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Our Services with
+                            Pricing Plan</h5>
+                        <h1 class="display-5 mb-0">We Offer Fair Prices for Dental Treatment</h1>
+                    </div>
+                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
+                        amet
+                        diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
+                        clita
+                        duo justo eirmod magna dolore erat amet</p>
+                    <h5 class="text-uppercase text-primary wow fadeInUp" data-wow-delay="0.3s">Call for Appointment</h5>
+                    <h1 class="wow fadeInUp" data-wow-delay="0.6s">{{ address.phone }}</h1>
+                </div>
+                <div class="col-lg-7">
+                    <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
+                        {% for serv in service %}
+                            <div class="price-item pb-4">
+                                <div class="position-relative">
+                                    <img class="img-fluid rounded-top" src="{{ serv.image.url }}" alt="">
+                                    <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
+                                         style="z-index: 2;">
+                                        <h2 class="text-primary m-0">${{ serv.cost }}</h2>
+                                    </div>
+                                </div>
+                                <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
+                                    <h4>{{ serv.name }}</h4>
+                                    <a href="{% url 'appointment:make-appintment' %}?service={{ serv.slug }}"
+                                       class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Appointment</a>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pricing End -->
+
+
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid bg-primary bg-testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="section-title mb-4">
+                <h5 class="position-relative d-inline-block text-primary text-uppercase">Our Certificate</h5>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="owl-carousel testimonial-carousel rounded p-5 wow zoomIn" data-wow-delay="0.6s">
+                        {% for cer in certificates %}
+                            <div class="testimonial-item text-center text-white">
+                                <img class="img-fluid mx-auto rounded mb-4" src="{{ cer.doctor.img.url }}"
+                                     alt="">
+                                <p class="fs-5">{{ cer.explanation }}</p>
+                                <hr class="mx-auto w-25">
+                                <h4 class="text-white mb-0">{{ cer.doctor.name }} - {{ cer.doctor.last_name }}
+                                    <a href="{{ cer.image.url }}" class="border border-white">
+                                    <span class="m-1" data-width="10" data-height="10">
+                                        <svg color="white"
+                                             xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                             fill="currentColor"
+                                             class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                        </svg>
+                                    </span>
+                                    </a></h4>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="section-title bg-light rounded h-100 p-5">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Our Dentist</h5>
+                        <h1 class="display-6 mb-4">Meet Our Certified & Experienced Dentist</h1>
+                        <a href="{% url 'appointment:make-appintment' %}"
+                           class="btn btn-primary py-3 px-5">Appointment</a>
+                    </div>
+                </div>
+                {% for dr in doctor %}
+                    <div class="col-lg-4 wow slideInUp" data-wow-delay="{{ forloop|delay }}">
+                        <div class="team-item">
+                            <div class="position-relative rounded-top" style="z-index: 1;">
+                                <img class="img-fluid rounded-top w-100" src="{{ dr.img.url }}"
+                                     alt="">
+                                <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
+                                    <a class="btn btn-primary btn-square m-1" href="{{ dr.telegram }}"><i
+                                            class="fab fa-telegram fw-normal"></i></a>
+                                    <a class="btn btn-primary btn-square m-1" href="{{ dr.linkedin }}"><i
+                                            class="fab fa-linkedin-in fw-normal"></i></a>
+                                    <a class="btn btn-primary btn-square m-1" href="{{ dr.instagram }}"><i
+                                            class="fab fa-instagram fw-normal"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
+                                <h4 class="mb-2"><a class="text-dark" href="{% url 'doctor:doctor-detail' dr.id %}">
+                                    Dr. {{ dr.name }} {{ dr.last_name }}
+                                </a></h4>
+
+                                <p class="text-primary mb-0">{{ dr.expert }}</p>
+                                <p class="text-primary mb-0">in time: {{ dr.in_time }}- out time {{ dr.out_time }}
+
+                                </p>
+                                <!-- star rating -->
+                                    <span class="fa fa-star {% if 1 <= dr.id|rate %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if 2 <= dr.id|rate %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if 3 <= dr.id|rate %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if 4 <= dr.id|rate %}checked{% endif %}"></span>
+                                    <span class="fa fa-star {% if 5 <= dr.id|rate %}checked{% endif %}"></span>
+                                <!-- star rating end-->
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+    <script src="{% static 'js/rating.js' %}"></script>
+
+{% endblock %}

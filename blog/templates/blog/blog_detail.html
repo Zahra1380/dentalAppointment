@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load handel_delay %}
+{% load paginate_in_result %}
+{% block title %}{{ blog.name }}{% endblock title %}
+
+{% block content %}
+    <!-- Team Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-12 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="team-item">
+                        <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
+                            <img class="img-fluid rounded-top w-50" src="{{ blog.photo.url }}"
+                                 alt="">
+                            <h4 class="mb-2"><a class="text-dark" href="#">
+                                {{ blog.title }}
+                            </a></h4>
+                            <p class="text-primary mb-0">
+                            <div class="row m-2">
+                                <div class="col-lg-6 col-sm-12">
+                                    <p>
+                                        <i class="bi bi-person me-1"></i>{{ blog.user.name }} {{ blog.user.last_name }}
+                                    </p>
+                                </div>
+                                <div class="col-lg-6 col-sm-12">
+                                    <p>
+                                        <i class="bi bi-calendar me-1"></i>{{ blog.publish_date }}
+                                    </p>
+                                </div>
+                            </div>
+                            </p>
+                            <hr>
+                            <p class="text-dark mb-2">{{ blog.text }}</p>
+                            <hr>
+                            <div class="text-start">
+                                <a href="https://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" class="facebook-btn">
+                                    <i class="fab fa-facebook-square m-2 " style="color: #1877f2" size="40"></i>
+                                </a>
+                                <a target="_blank" href="https://api.whatsapp.com/send?text={{ blog.title }} {{ request.build_absolute_uri }}">
+                                    <i class="fab fa-whatsapp m-2 " style="color: limegreen"></i>
+                                </a>
+                                <a href="https://twitter.com/share?url={{ request.build_absolute_uri }}&text={{ blog.title }}" class="twitter-btn">
+                                    <i class="fab fa-twitter-square m-2 " style="color: dodgerblue"></i>
+                                </a>
+                                <a href="https://pinterest.com/pin/create/bookmarklet/?media={{ blog.photo }}&url={{ request.build_absolute_uri }}&description={{ blog.title }}" class="pinterest-btn">
+                                    <i class="fa fa-pinterest-square m-2 " style="color: firebrick"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/shareArticle?url={{ request.build_absolute_uri }}&title={{ blog.title }}" class="linkedin-btn">
+                                    <i class="fa fa-linkedin-square m-2 " style="color: steelblue"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+{% endblock content %}

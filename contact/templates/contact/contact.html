@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}contact us{% endblock %}
+
+{% block content %}
+    <!-- Contact Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-xl-6 col-lg-6 wow slideInUp" data-wow-delay="0.1s">
+                    <div class="bg-light rounded h-100 p-5">
+                        <div class="section-title">
+                            <h5 class="position-relative d-inline-block text-primary text-uppercase">Contact Us</h5>
+                            <h1 class="display-6 mb-4">Feel Free To Contact Us</h1>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Our Office</h5>
+                                <span>{{ address.state }}-{{ address.city_name }}</span>
+                                <p>{{ address.rest_add }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Email Us</h5>
+                                <span>{{ address.email }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
+                            <div class="text-start">
+                                <h5 class="mb-0">Call Us</h5>
+                                <span>{{ address.phone }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 wow slideInUp" data-wow-delay="0.3s">
+                    <form method="post">
+                        {% if form.non_field_errors %}
+                            <div class="border border-danger text-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <!-- name -->
+                                {% if form.name.errors %}
+                                    <div class="border border-danger text-danger">
+                                        {{ form.name.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ form.name }}
+                            </div>
+                            <div class="col-12">
+                                <!-- email -->
+                                {% if form.email.errors %}
+                                    <div class="border border-danger text-danger">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ form.email }}
+                            </div>
+                            <div class="col-12">
+                                <!-- Subject -->
+                                {% if form.subject.errors %}
+                                    <div class="border border-danger text-danger">
+                                        {{ form.subject.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ form.subject }}
+                            </div>
+                            <div class="col-12">
+                                <!-- Message -->
+                                {% if form.message.errors %}
+                                    <div class="border border-danger text-danger">
+                                        {{ form.message.errors }}
+                                    </div>
+                                {% endif %}
+                                {{ form.message }}
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock %}

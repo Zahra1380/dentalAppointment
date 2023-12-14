@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}dr. {{ doctor.name }}-{{ doctor.last_name }}{% endblock %}
+
+{% block content %}
+    <!-- Detail Start -->
+    <div class="container-fluid bg-primary bg-testimonial py-5 my-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 bg-light">
+
+                    <div class="testimonial-item text-center text-white">
+                        <img class="img-fluid mx-auto rounded-5 m-4 w-25" src="{{ doctor.img.url }}"
+                             alt="">
+                        <p class="fs-5 text-primary">
+                        <h4>doctor full name</h4>
+                        <span class="text-primary"> {{ doctor.name }} - {{ doctor.last_name }}</span>
+                        </p>
+                        <p>
+                        <h4>services</h4>
+
+                        {% for ser in doctor.service.all %}
+                            {% if forloop.last %}
+                                <span class="text-primary">
+                                {{ ser }}
+                                </span>
+                            {% else %}
+                                <span class="text-primary">
+                                {{ ser }} -
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                        </p>
+                        <p>
+                        <h4>expert</h4>
+                        <span class="text-primary">{{ doctor.expert }}</span>
+                        </p>
+                        <p>
+                        <h4>in time - out time</h4>
+                        <span class="text-primary">{{ doctor.in_time }} - {{ doctor.out_time }}</span>
+                        </p>
+                        <p>
+                            {% if request.user.is_authenticated %}
+                                <!-- star rating -->
+                                <form class="rate_form" method="post" action="" id="{{ doctor.id }}">
+                                    {% csrf_token %}
+                                    <fieldset class="border border-primary ">
+                                        <h4>
+                                            <legend class="text-dark m-2">Rating:</legend>
+                                        </h4>
+
+                                        <!-- star rating -->
+                                        <div class="text-dark">
+                                            <button type="submit" class="fa fa-star border border-light bg-light"
+                                                    id="first"></button>
+                                            <button type="submit" class="fa fa-star border border-light bg-light"
+                                                    id="second"></button>
+                                            <button type="submit" class="fa fa-star border border-light bg-light"
+                                                    id="third"></button>
+                                            <button type="submit" class="fa fa-star border border-light bg-light"
+                                                    id="fourth"></button>
+                                            <button type="submit" class="fa fa-star border border-light bg-light"
+                                                    id="fifth"></button>
+                                        </div>
+                                        <div id="confirm-box"></div>
+                                        <!-- star rating end-->
+                                        </fildset>
+                                        <!-- star rating end-->
+                                        </p>
+                                    </fieldset>
+                                </form>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <script src="{% static 'js/rating.js' %}"></script>
+
+    <!-- Detail End -->
+{% endblock %}

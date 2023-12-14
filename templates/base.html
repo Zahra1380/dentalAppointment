@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'includes/stylesheet_links.html' %}
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+</head>
+
+<body>
+{% include 'includes/loding_bars.html' %}
+{% include 'includes/topbar_navbar.html' %}
+{% include 'includes/full_screen.html' %}
+
+{% block content %}{% endblock %}
+
+{% include 'includes/footer_part.html' %}
+{% include 'includes/scrip_importance.html' %}
+
+
+</body>
+
+</html>

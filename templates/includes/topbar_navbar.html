@@ -1,0 +1,68 @@
+
+<!-- Topbar Start -->
+<div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+        </div>
+        <div class="col-md-6 text-center text-lg-end">
+            <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                <div class="me-3 pe-3 border-end py-2">
+                    <p class="m-0"><i class="fa fa-envelope-open me-2"></i>{{ address.email }}</p>
+                </div>
+                <div class="py-2">
+                    <p class="m-0"><i class="fa fa-phone-alt me-2"></i>{{ address.phone }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+    <a href="{% url 'home:home' %}" class="navbar-brand p-0">
+        <h1 class="m-0 text-primary"><i class='fas fa-tooth me-2'></i>DentCare</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+            <a href="{% url 'home:home' %}" class="nav-item nav-link active text-dark">Home</a>
+            <a href="{% url 'blog:blogs' %}" class="nav-item nav-link">Blogs</a>
+            <a href="{% url 'about:about-use' %}" class="nav-item nav-link">About</a>
+            <a href="{% url 'doctor:service-price' %}" class="nav-item nav-link">Service & Pricing</a>
+
+            <a href="{% url 'contact:contact-us' %}" class="nav-item nav-link">Contact</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu m-0">
+                    <a href="{% url 'doctor:our-team' %}" class="dropdown-item">Our Dentist</a>
+                    <a href="{% url 'doctor:doctors-certificate' %}" class="dropdown-item">Certificate</a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle bg-light" data-bs-toggle="dropdown">
+                    <span class="">account</span>
+                </a>
+                <div class="dropdown-menu m-0">
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'account:sign-up' %}" class="dropdown-item">sign up</a>
+                        <a href="{% url 'account:sign-in' %}" class="dropdown-item">sign in</a>
+                        <a href="{% url 'account:forget-password' %}" class="dropdown-item">forget password</a>
+                    {% else %}
+                        <a href="{% url 'account:profile' %}" class="dropdown-item">profile</a>
+                        <a href="{% url 'account:change-password' %}" class="dropdown-item">change password</a>
+                        <a href="{% url 'account:log-out' %}" class="dropdown-item">log out</a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+        <a href="{% url 'appointment:make-appintment' %}" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+    </div>
+</nav>
+<!-- Navbar End -->

@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if 'up' in request.url %}
+        Sign Up
+    {% elif 'set' in request.url %}
+        Set Info
+    {% else %}
+        Register
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <!-- Newsletter Start -->
+    <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
+        <div class="container">
+            <div class="bg-primary p-5">
+                <form method="post" class="mx-auto" style="max-width: 600px;">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {% if 'sign-up' in request.path %}
+                        {{ form.email }}
+                        <button class="btn btn-dark px-4">Sign Up</button>
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                <div class="text-danger border border-danger rounded">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% elif 'forget' in request.path %}
+                            {{ form.email }}
+                            <button class="btn btn-dark px-4">Submit</button>
+                            {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                    <div class="text-danger border border-danger rounded">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% elif 'set' in request.path %}
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.date_of_birth }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.father_name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.personal_id }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.pass1 }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.pass2 }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    <button class="btn btn-dark px-4">Submit</button>
+                                </div>
+                            </div>
+                            {% if error %}
+                                <div class="text-danger border border-danger rounded">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+
+                        {% elif 'sign-in' in request.path %}
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        {% for error in form.email.errors %}
+                                            <div class="text-danger border border-danger rounded">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    {{ form.pass1 }}
+                                    {% if form.pass1.errors %}
+                                        {% for error in form.email.errors %}
+                                            <div class="text-danger border border-danger rounded">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-dark px-4">Sign In</button>
+                                </div>
+                            </div>
+                        {% elif 'profile' in request.path %}
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.date_of_birth }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.father_name }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.personal_id }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    <button class="btn btn-dark px-4">Submit</button>
+                                </div>
+                            </div>
+                            {% if error %}
+                                <div class="text-danger border border-danger rounded">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+                        {% elif 'change' in request.path %}
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.old_password }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.password1 }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    {{ form.password2 }}
+                                </div>
+                                <div class="col-md-6 col-sm-12 m-2">
+                                    <button class="btn btn-dark px-4">Submit</button>
+                                </div>
+                            </div>
+                            {% if error %}
+                                <div class="text-danger border border-danger rounded">
+                                    {{ error }}
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {{ form.code }}
+                            <button class="btn btn-dark px-4">submit</button>
+                            {% if form.code.errors %}
+                                {% for error in form.email.errors %}
+                                    <div class="text-danger border border-danger rounded">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Newsletter End -->
+{% endblock %}
